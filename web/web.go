@@ -3,14 +3,15 @@ package web
 import (
 	"embed"
 	"fmt"
-	"github.com/gin-contrib/gzip"
-	"github.com/gin-gonic/gin"
 	"io/fs"
 	"net/http"
 	"strconv"
 	"trojan/core"
 	"trojan/util"
 	"trojan/web/controller"
+
+	"github.com/gin-contrib/gzip"
+	"github.com/gin-gonic/gin"
 )
 
 //go:embed templates/*
@@ -159,7 +160,7 @@ func staticRouter(router *gin.Engine) {
 	staticFs, _ := fs.Sub(f, "templates/static")
 	router.StaticFS("/static", http.FS(staticFs))
 
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/tj", func(c *gin.Context) {
 		indexHTML, _ := f.ReadFile("templates/" + "index.html")
 		c.Writer.Write(indexHTML)
 	})
